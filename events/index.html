@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events | IEEE CSTMC</title>
+  <meta name="description" content="Upcoming and past events from IEEE Computer Society Toronto Metropolitan Chapter.">
+  <link rel="icon" href="../assets/images/logo.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!--  Header  -->
+  <header class="site-header">
+    <nav class="container nav-bar">
+      <a href="../" class="logo"><img src="../assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter"></a>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="../">Home</a></li>
+        <li><a href="../events/" class="active">Events</a></li>
+        <li><a href="../team/">Team</a></li>
+        <li><a href="../contact/">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="section">
+      <div class="container">
+        <h1 class="page-title reveal">Events</h1>
+        <p class="page-intro reveal">Workshops, Panels and Networking Events. Built for Students. Click any poster to see it full size.</p>
+      </div>
+    </section>
+
+    <!--  Upcoming  -->
+    <section class="container">
+      <h2 class="section-title reveal">Upcoming</h2>
+
+      <div class="card-grid" style="margin-top:30px;">
+        <!-- To add an upcoming event: copy one <article> block and edit it -->
+
+          <article class="event-card reveal">
+            <div class="event-poster"><img src="../assets/images/events/SWFWorkshop.png" alt="Software Fundamentals Series"></div>
+            <span class="tag-upcoming">Upcoming</span>
+            <h3 class="event-title"><span class="date-badge">November 4,5, 11 & 12</span>Software Fundamentals Workshop Series</h3>
+            <ul class="event-meta">
+              <li>6:00 PM &ndash; 8:00 PM</li>
+              <li>George Vari Engineering &amp; Computing Centre</li>
+            </ul>
+            <a href="https://linktr.ee/IEEECSTMC?utm_source=linktree_profile_share&ltsid=d2d36359-6abe-4a47-912a-0e92fa278164" target="_blank" rel="noopener" class="btn btn-primary">Register</a>
+          </article>
+
+       
+      </div>
+    </section>
+
+    <!--  Past events, grouped by school year  -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Archive by year</p>
+            <h2 class="section-title">Past Events</h2>
+          </div>
+
+          <!-- Filter buttons: data-year must match a .year-group's data-year -->
+          <div class="year-filter">
+            <button class="filter-btn active" data-year="all">All</button>
+            <button class="filter-btn" data-year="2026-27">2026&ndash;27</button>
+            <button class="filter-btn" data-year="2025-26">2025&ndash;26</button>
+            <button class="filter-btn" data-year="2024-25">2024&ndash;25</button>
+          </div>
+        </div>
+
+        <!-- 2026-27 -->
+        <div class="year-group" data-year="2026-27">
+          <h3 class="year-heading">2026&ndash;27</h3>
+          <div class="card-grid">
+            
+            <article class="event-card reveal">
+              <div class="event-poster"><img src="../assets/images/events/mythbusters.png" alt="Career Mythbusters Panel poster"></div>
+              <h3 class="event-title"><span class="date-badge">Oct 26</span> Career Mythbusters Panel</h3>
+              <p>Hot-seat game show with panelists in the industry.</p>
+            </article>
+
+            <article class="event-card reveal">
+              <div class="event-poster"><img src="../assets/images/events/ece_poster.png" alt="ECE Meet & Greet poster"></div>
+              <h3 class="event-title"><span class="date-badge">Oct 13</span> ECE Meet & Greet</h3>
+              <p>Connect with faculty and peers in the Electrical and Computer Engineering department.</p>
+            </article>
+
+            
+          </div>
+        </div>
+
+        <!-- 2025-26 -->
+        <div class="year-group" data-year="2025-26">
+          <h3 class="year-heading">2025&ndash;26</h3>
+          <div class="card-grid">
+            
+            <article class="event-card reveal">
+              <div class="event-poster"><img src="../assets/images/events/arduino_poster.png" alt="Arduino Workshop"></div>
+              <h3 class="event-title"><span class="date-badge">Mar 10 & 12</span> Arduino Workshop</h3>
+              <p>Learn the basics of Arduino programming and build your first project.</p>
+            </article>
+
+            <article class="event-card reveal">
+              <div class="event-poster"><img src="../assets/images/events/industry_night2026.png" alt="Industry Night"></div>
+              <h3 class="event-title"><span class="date-badge">Feb 11</span> Industry Night</h3>
+              <p>Network with industry professionals from various companies.</p>
+            </article>
+
+            <article class="event-card reveal">
+              <div class="event-poster"><img src="../assets/images/events/career_mythbust2026.png" alt="Career Mythbusters Panel"></div>
+              <h3 class="event-title"><span class="date-badge">Nov 11</span> Career Mythbusters Panel</h3>
+              <p>Hot-seat game show with panelists in the industry.</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- 2024-25 -->
+        <div class="year-group" data-year="2024-25">
+          <h3 class="year-heading">2024&ndash;25</h3>
+          <div class="card-grid">
+            <article class="event-card reveal">
+              <div class="event-poster"><img src="../assets/images/events/resume_mastery.png" alt="Resume Mastery Workshop"></div>
+              <h3 class="event-title"><span class="date-badge">Mar 26</span> Resume Mastery Workshop</h3>
+              <p>Land your job faster - master your resume and ace the interview.</p>
+            </article>
+
+            <article class="event-card reveal">
+              <div class="event-poster"><img src="../assets/images/events/pc_building.png" alt="PC Building Workshop poster"></div>
+              <h3 class="event-title"><span class="date-badge">Mar</span> PC Building Workshop</h3>
+              <p>Hands-on with Free Geek Toronto to learn how each component fits together.</p>
+            </article>
+
+            <article class="event-card reveal">
+              <div class="event-poster"><img src="../assets/images/events/industry2025.png" alt="Industry Night poster"></div>
+              <h3 class="event-title"><span class="date-badge">Feb 11</span> Industry Night</h3>
+              <p>Networking with Bell, Deloitte, AWS, TELUS, Metrolinx, IBM and more.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Full-screen poster viewer (opened by main.js) -->
+  <div class="lightbox" role="dialog" aria-label="Event poster">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <img src="" alt="">
+  </div>
+
+  <!--  Footer  -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <img src="../assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter">
+        <ul class="footer-links">
+          <li><a href="../">Home</a></li>
+          <li><a href="../events/">Events</a></li>
+          <li><a href="../team/">Team</a></li>
+          <li><a href="../contact/">Contact</a></li>
+        </ul>
+      </div>
+      <p class="footer-bottom">&copy; <span id="year"></span> IEEE Computer Society Toronto Metropolitan Chapter</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Meta tags -->  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IEEE CSTMC | Learn. Build. Connect.</title>
+  <meta name="description" content="IEEE Computer Society Toronto Metropolitan Chapter - a student-driven community for software, hardware and emerging tech.">
+  <link rel="icon" href="assets/images/logo.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!--  Header (same on every page - note remember to update all 4 pages)  -->
+  <header class="site-header">
+    <nav class="container nav-bar">
+      <a href="./" class="logo"><img src="assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter"></a>
+
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Navigation links -->
+      <ul class="nav-links">
+        <li><a href="./" class="active">Home</a></li>
+        <li><a href="events/">Events</a></li>
+        <li><a href="team/">Team</a></li>
+        <li><a href="contact/">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!--  Hero  -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-text">
+            <p class="eyebrow">IEEE Computer Society &middot; TMU</p>
+            <h1><span class="w1">Learn.</span> <span class="w2">Build.</span> <span class="w3">Connect.</span></h1>
+            <p>IEEE CSTMC is a student-driven community advancing software, hardware, and emerging technologies skills through collaborative projects, workshops, and industry engagement.</p>
+            <div class="hero-buttons">
+              <a href="events/" class="btn btn-primary">Join Events</a>
+              <a href="team/" class="btn btn-outline">Meet the Team</a>
+            </div>
+          </div>
+
+          <!-- Auto-scrolling photos. The list is written twice so the loop is seamless. -->
+          <div class="photo-strip">
+            <div class="photo-track">
+              <figure class="photo-item"><img src="assets/images/hero/industry_night.jpg" alt="Students networking at Industry Night"><figcaption>Industry Night</figcaption></figure>
+              <figure class="photo-item"><img src="assets/images/hero/ECE.jpg" alt="ECE Meet & Greet"><figcaption>ECE Meet & Greet</figcaption></figure>
+              <figure class="photo-item"><img src="assets/images/hero/SWF.jpg" alt="SWF"><figcaption>Software Fundamentals Workshop</figcaption></figure>
+              <figure class="photo-item"><img src="assets/images/hero/PC.jpg" alt="PC"><figcaption>PC Building Workshop</figcaption></figure>
+             
+              <!-- duplicate set (hidden from screen readers) -->
+              <figure class="photo-item" aria-hidden="true"><img src="assets/images/hero/industry_night.jpg" alt=""><figcaption>Industry Night</figcaption></figure>
+              <figure class="photo-item" aria-hidden="true"><img src="assets/images/hero/ECE.jpg" alt=""><figcaption>ECE Meet & Greet</figcaption></figure>
+              <figure class="photo-item" aria-hidden="true"><img src="assets/images/hero/SWF.jpg" alt=""><figcaption>Software Fundamentals Workshop</figcaption></figure>
+              <figure class="photo-item" aria-hidden="true"><img src="assets/images/hero/PC.jpg" alt=""><figcaption>PC Building Workshop</figcaption></figure>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--  Stats (numbers count up on scroll - edit data-target to actual numbers)  -->
+    <section class="container reveal">
+      <div class="stats">
+        <div class="stat"><span class="stat-number" data-target="50" data-suffix="+">0</span><div class="stat-label">Events Hosted</div></div>
+        <div class="stat"><span class="stat-number" data-target="500" data-suffix="+">0</span><div class="stat-label">Students Reached</div></div>
+        <div class="stat"><span class="stat-number" data-target="10" data-suffix="+">0</span><div class="stat-label">Industry Partners</div></div>
+        <div class="stat"><span class="stat-number" data-target="20" data-suffix="">0</span><div class="stat-label">Executive Members</div></div>
+      </div>
+    </section>
+
+    <!--  Upcoming events  -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Don't miss out</p>
+            <h2 class="section-title">Upcoming Events</h2>
+          </div>
+          <a href="events/" class="link-arrow">See all events</a>
+        </div>
+
+        <div class="card-grid">
+          <article class="event-card reveal">
+            <div class="event-poster"><img src="assets/images/events/SWFWorkshop.png" alt="Software Fundamentals Series"></div>
+            <span class="tag-upcoming">Upcoming</span>
+            <h3 class="event-title"><span class="date-badge">November 4,5, 11 & 12</span>Software Fundamentals Workshop Series</h3>
+            <ul class="event-meta">
+              <li>6:00 PM &ndash; 8:00 PM</li>
+              <li>George Vari Engineering &amp; Computing Centre</li>
+            </ul>
+            <a href="https://linktr.ee/IEEECSTMC?utm_source=linktree_profile_share&ltsid=d2d36359-6abe-4a47-912a-0e92fa278164" target="_blank" rel="noopener" class="btn btn-primary">Register</a>
+          </article>
+
+          <!--
+          <article class="event-card reveal">
+            <div class="event-poster"><img src="assets/images/events/upcoming-2.svg" alt="Python Workshop poster"></div>
+            <span class="tag-upcoming">Upcoming</span>
+            <h3 class="event-title"><span class="date-badge">Nov 12</span> SWF: Python Workshop</h3>
+            <ul class="event-meta">
+              <li>6:00 PM &ndash; 8:00 PM</li>
+              <li>Room 208, Daphne Cockwell Complex</li>
+            </ul>
+            <a href="https://linktr.ee/IEEECSTMC?utm_source=linktree_profile_share&ltsid=d2d36359-6abe-4a47-912a-0e92fa278164" target="_blank" rel="noopener" class="btn btn-primary">Register</a>
+          </article>
+          -->
+          
+        </div>
+      </div>
+    </section>
+
+    <!--  Recent events  -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">What we've been up to</p>
+            <h2 class="section-title">Recent Events</h2>
+          </div>
+          <a href="events/" class="link-arrow">Browse the archive</a>
+        </div>
+
+        <div class="card-grid">
+           <article class="event-card reveal">
+              <div class="event-poster"><img src="../assets/images/events/mythbusters.png" alt="Career Mythbusters Panel poster"></div>
+              <h3 class="event-title"><span class="date-badge">Oct 26</span> Career Mythbusters Panel</h3>
+              <p>Hot-seat game show with panelists in the industry.</p>
+            </article>
+
+            <article class="event-card reveal">
+              <div class="event-poster"><img src="../assets/images/events/ece_poster.png" alt="ECE Meet & Greet poster"></div>
+              <h3 class="event-title"><span class="date-badge">Oct 13</span> ECE Meet & Greet</h3>
+              <p>Connect with faculty and peers in the Electrical and Computer Engineering department.</p>
+            </article>
+
+            <article class="event-card reveal">
+              <div class="event-poster"><img src="../assets/images/events/arduino_poster.png" alt="Arduino Workshop"></div>
+              <h3 class="event-title"><span class="date-badge">Mar 10 & 12</span> Arduino Workshop</h3>
+              <p>Learn the basics of Arduino programming and build your first project.</p>
+            </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!--  About  -->
+    <section class="section" id="about">
+      <div class="container about">
+        <div class="about-text reveal">
+          <p class="eyebrow">Mission &amp; Vision</p>
+          <h2 class="section-title">About Us</h2>
+          <p>The IEEE Computer Society Toronto Metropolitan Chapter (CSTMC), originally founded as the "Hobby Computer Club" at Ryerson University, has grown into a cornerstone for students seeking to enhance their programming knowledge, connect with like-minded peers, and network with industry professionals.</p>
+          <p>Our mission is to empower students to invest in their futures by providing opportunities and resources to develop both technical and soft skills through workshops and networking events.</p>
+
+          <div class="socials">
+            <a href="https://www.instagram.com/ieeecstmc/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/ieeecstmc/" target="_blank" rel="noopener" class="social-btn" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4v11H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6v5.3h-4v-4.7c0-1.1 0-2.6-1.6-2.6s-1.8 1.2-1.8 2.5v4.8h-4z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="about-photo reveal">
+          <img src="assets/images/about/group-photo.svg" alt="IEEE CSTMC executive team group photo">
+        </div>
+      </div>
+    </section>
+
+    <!--  Sponsors (list is written twice for a seamless loop)  -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="reveal" style="text-align:center; margin-bottom:40px;">
+          <p class="eyebrow">Who we've worked with</p>
+          <h2>Our Partners</h2>
+        </div>
+        <div class="sponsors">
+          <div class="sponsor-track">
+            <img src="assets/images/sponsors/bell.svg" alt="Bell">
+            <img src="assets/images/sponsors/deloitte.svg" alt="Deloitte">
+            <img src="assets/images/sponsors/aws.svg" alt="AWS">
+            <img src="assets/images/sponsors/telus.svg" alt="TELUS">
+            <img src="assets/images/sponsors/metrolinx.svg" alt="Metrolinx">
+            <img src="assets/images/sponsors/ibm.svg" alt="IBM">
+            <img src="assets/images/sponsors/scotiabank.svg" alt="Scotiabank">
+            <img src="assets/images/sponsors/hydro-one.svg" alt="Hydro One">
+            <!-- duplicate set -->
+            <img src="assets/images/sponsors/bell.svg" alt="" aria-hidden="true">
+            <img src="assets/images/sponsors/deloitte.svg" alt="" aria-hidden="true">
+            <img src="assets/images/sponsors/aws.svg" alt="" aria-hidden="true">
+            <img src="assets/images/sponsors/telus.svg" alt="" aria-hidden="true">
+            <img src="assets/images/sponsors/metrolinx.svg" alt="" aria-hidden="true">
+            <img src="assets/images/sponsors/ibm.svg" alt="" aria-hidden="true">
+            <img src="assets/images/sponsors/scotiabank.svg" alt="" aria-hidden="true">
+            <img src="assets/images/sponsors/hydro-one.svg" alt="" aria-hidden="true">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--  Join Us  -->
+    <section class="section">
+      <div class="container">
+        <div class="join-banner reveal">
+          <h2>Ready to get involved?</h2>
+          <p>Come to our next event, follow us for updates, or become an IEEE member to unlock resources, conferences and a global network.</p>
+          <div class="hero-buttons" style="justify-content:center;">
+            <a href="https://www.instagram.com/ieeecstmc/" target="_blank" rel="noopener" class="btn btn-primary">Follow @ieeecstmc</a>
+            <a href="https://linktr.ee/IEEECSTMC?utm_source=linktree_profile_share&ltsid=a7ab972f-69f2-43bb-ad1f-7806c598b5b3" target="_blank" rel="noopener" class="btn btn-primary">Join Our Community</a>
+            <a href="https://ieeecstmc.us5.list-manage.com/subscribe?u=8fe68dee492ba1ed018e6572e&id=c52763f709" target="_blank" rel="noopener" class="btn btn-primary">Sign up for our mailing list</a>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!--  Footer (this is the same on every page)  -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <img src="assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter">
+        <ul class="footer-links">
+          <li><a href="./">Home</a></li>
+          <li><a href="events/">Events</a></li>
+          <li><a href="team/">Team</a></li>
+          <li><a href="contact/">Contact</a></li>
+        </ul>
+      </div>
+      <p class="footer-bottom">&copy; <span id="year"></span> IEEE Computer Society Toronto Metropolitan Chapter</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
