@@ -17,28 +17,37 @@
 
   <!--  Header  -->
   <header class="site-header">
-    <nav class="container nav-bar">
+    <nav class="container nav-bar" aria-label="Main">
       <a href="../" class="logo"><img src="../assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter"></a>
 
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
         <span></span><span></span><span></span>
       </button>
 
-      <ul class="nav-links">
-        <li><a href="../">Home</a></li>
-        <li><a href="../events/" class="active">Events</a></li>
-        <li><a href="../team/">Team</a></li>
-        <li><a href="../contact/">Contact</a></li>
-      </ul>
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-links">
+          <li><a href="../">Home</a></li>
+          <li><a href="../events/" class="active" aria-current="page">Events</a></li>
+          <li><a href="../team/">Team</a></li>
+          <li><a href="../sponsors/">Sponsors</a></li>
+          <li><a href="../contact/">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="../sponsors/#sponsor-us" class="btn btn-outline btn-sm">Sponsor Us</a>
+          <a href="https://linktr.ee/IEEECSTMC" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Join Us</a>
+        </div>
+      </div>
     </nav>
   </header>
 
   <main>
 
-    <section class="section">
-      <div class="container">
+    <section class="page-hero">
+      <div class="hero-bg" aria-hidden="true"><div class="hero-grid"></div></div>
+      <div class="container section-intro">
+        <p class="eyebrow reveal">Workshops &middot; Panels &middot; Networking</p>
         <h1 class="page-title reveal">Events</h1>
-        <p class="page-intro reveal">Workshops, Panels and Networking Events. Built for Students. Click any poster to see it full size.</p>
+        <p class="lead reveal">Built for students. Click any poster to see it full size.</p>
       </div>
     </section>
 
@@ -47,7 +56,8 @@
       <h2 class="section-title reveal">Upcoming</h2>
 
       <div class="card-grid" style="margin-top:30px;">
-        <!-- To add an upcoming event: copy one <article> block and edit it -->
+        <!-- To add an upcoming event: copy one <article> block and edit it.
+             data-countdown = start date and time (YYYY-MM-DDTHH:MM:SS, Toronto time) -->
 
           <article class="event-card reveal">
             <div class="event-poster"><img src="../assets/images/events/SWFWorkshop.png" alt="Software Fundamentals Series"></div>
@@ -57,10 +67,40 @@
               <li>6:00 PM &ndash; 8:00 PM</li>
               <li>George Vari Engineering &amp; Computing Centre</li>
             </ul>
+            <div class="countdown" data-countdown="2026-11-04T18:00:00"></div>
             <a href="https://linktr.ee/IEEECSTMC?utm_source=linktree_profile_share&ltsid=d2d36359-6abe-4a47-912a-0e92fa278164" target="_blank" rel="noopener" class="btn btn-primary">Register</a>
           </article>
 
        
+      </div>
+    </section>
+
+    <!--  Why Attend?  -->
+    <section class="container why-attend">
+      <div class="feature-card reveal">
+        <div class="feature-card-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <h2>Why Attend?</h2>
+        </div>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <h3>Learn by Building</h3>
+            <p>Hands-on workshops, from Arduino and PC builds to software fundamentals, taught by experienced student members.</p>
+          </div>
+          <div class="feature-item">
+            <h3>Meet Industry</h3>
+            <p>Industry Night and our panels put you in the room with engineers and recruiters from companies like Bell, Deloitte, AWS and TELUS.</p>
+          </div>
+          <div class="feature-item">
+            <h3>Grow Your Career</h3>
+            <p>Resume Mastery and Career Mythbusters give you honest advice on resumes, internships and interviews.</p>
+          </div>
+          <div class="feature-item">
+            <h3>Find Your People</h3>
+            <p>Meet ECE and CS students who are into the same things you are, and leave with new friends as well as new skills.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -164,17 +204,9 @@
 
   <!--  Footer  -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <img src="../assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter">
-        <ul class="footer-links">
-          <li><a href="../">Home</a></li>
-          <li><a href="../events/">Events</a></li>
-          <li><a href="../team/">Team</a></li>
-          <li><a href="../contact/">Contact</a></li>
-        </ul>
-      </div>
+    <div class="container footer-grid">
       <p class="footer-bottom">&copy; <span id="year"></span> IEEE Computer Society Toronto Metropolitan Chapter</p>
+      <img src="../assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter">
     </div>
   </footer>
 

@@ -3,20 +3,23 @@
    ---------------------------------------------------------
    Sections:
    1.  Colour palette & base settings
-   2.  Reusable pieces (container, buttons, section titles)
+   2.  Reusable pieces (container, buttons, pills, section intros)
    3.  Header & navigation
-   4.  Hero (home page)
-   5.  Stats row
-   6.  Event cards
-   7.  About section
-   8.  Sponsors strip
-   9.  Join Us banner
-   10. Events page (filter + lightbox)
-   11. Team page
-   12. Contact page
-   13. Footer
-   14. Scroll animations
-   15. Mobile / small screens
+   4.  Hero (home page) + tech background effects
+   5.  Photo band (left-to-right auto-scrolling photos)
+   6.  Stats row
+   7.  Event cards + countdown
+   8.  "What We Do" cards + feature card ("Why Attend?")
+   9.  About section
+   10. Sponsors strip (home page)
+   11. Join Us banner
+   12. Events page (filter + lightbox)
+   13. Team page
+   14. Contact page + FAQ
+   15. Sponsors page (partner grid + tier cards)
+   16. Footer
+   17. Scroll animations
+   18. Mobile / small screens
    ========================================================= */
 
 
@@ -45,12 +48,23 @@
   --light-blue: #bcd7e7;
   --white: #ffffff;
 
+  /* Translucent turquoise, used for pills, glows and icon boxes */
+  --tint: rgba(113, 150, 137, 0.14);
+  --tint-border: rgba(113, 150, 137, 0.4);
+
+  /* Sponsor tier bars (sponsors page) */
+  --bronze: linear-gradient(90deg, #8a4f24, #c98a4b);
+  --silver: linear-gradient(90deg, #7d868f, #c3cad1);
+  --gold: linear-gradient(90deg, #b8891c, #e8c35a);
+  --platinum: linear-gradient(90deg, var(--turquoise), var(--light-blue));
+
   /* Shared values */
   --radius: 18px;
   --radius-sm: 10px;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   --max-width: 1200px;
-  --header-height: 84px;
+  --header-height: 68px;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
 * {
@@ -59,6 +73,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Stops in-page links (like #sponsor-us) hiding under the sticky header */
+  scroll-padding-top: calc(var(--header-height) + 20px);
 }
 
 body {
@@ -66,8 +82,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: 15px;
+  line-height: 1.6;
   /* Keeps the footer at the bottom on short pages */
   min-height: 100vh;
   display: flex;
@@ -103,6 +119,12 @@ a:hover {
   color: var(--sage);
 }
 
+/* Visible outline for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 3px;
+}
+
 
 /* ---------- 2. Reusable pieces ---------- */
 .container {
@@ -113,7 +135,7 @@ a:hover {
 }
 
 .section {
-  padding: 90px 0;
+  padding: 64px 0;
 }
 
 .section-alt {
@@ -124,24 +146,31 @@ a:hover {
 .section-title {
   display: flex;
   align-items: center;
-  gap: 18px;
-  font-size: 2rem;
+  gap: 16px;
+  font-size: 1.6rem;
 }
 
 .section-title::after {
   content: "";
-  width: 120px;
+  width: 90px;
   height: 4px;
   border-radius: 4px;
   background: linear-gradient(90deg, var(--turquoise), var(--sage));
 }
 
+/* Small pill label above headings */
 .eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-size: 0.85rem;
-  color: var(--turquoise);
-  margin-bottom: 8px;
+  display: inline-block;
+  padding: 4px 13px;
+  margin-bottom: 12px;
+  border: 1px solid var(--tint-border);
+  border-radius: 999px;
+  background: var(--tint);
+  color: var(--sage);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
 }
 
 .section-head {
@@ -150,30 +179,86 @@ a:hover {
   align-items: flex-end;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
+}
+
+/* Centered pill + heading + paragraph block */
+.section-intro {
+  max-width: 660px;
+  margin: 0 auto 36px;
+  text-align: center;
+}
+
+.section-intro h2 {
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.section-intro .lead:last-child {
+  margin-bottom: 0;
+}
+
+/* Top of the Events / Team / Contact / Sponsors pages */
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 56px 0 36px;
+}
+
+.page-hero .section-intro {
+  margin-bottom: 0;
+}
+
+/* Fade the background out at the bottom so it doesn't end in a hard line */
+.page-hero .hero-bg {
+  -webkit-mask-image: linear-gradient(#000 55%, transparent);
+  mask-image: linear-gradient(#000 55%, transparent);
 }
 
 .page-title {
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2.1rem, 4.6vw, 3.1rem);
   margin-bottom: 10px;
 }
 
-.page-intro {
-  color: var(--muted);
-  max-width: 640px;
-  font-size: 1.1rem;
+/* Rounded square that holds an icon */
+.icon-badge {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 14px;
+  border: 1px solid var(--tint-border);
+  border-radius: 12px;
+  background: var(--tint);
+  color: var(--sage);
+}
+
+.icon-badge svg {
+  width: 21px;
+  height: 21px;
+}
+
+.center-link {
+  margin-top: 28px;
+  text-align: center;
 }
 
 /* Buttons */
 .btn {
   display: inline-block;
-  padding: 13px 28px;
+  padding: 10px 22px;
   border-radius: var(--radius-sm);
   font-weight: 600;
+  text-align: center;
   border: 2px solid transparent;
   cursor: pointer;
-  font-size: 1rem;
-  transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+  font-size: 0.93rem;
+  transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .btn:hover {
@@ -188,6 +273,7 @@ a:hover {
 .btn-primary:hover {
   background: var(--beige);
   color: #000;
+  box-shadow: 0 8px 24px rgba(207, 213, 184, 0.25);
 }
 
 .btn-outline {
@@ -198,6 +284,15 @@ a:hover {
 .btn-outline:hover {
   background: var(--turquoise);
   color: #000;
+}
+
+.btn-sm {
+  padding: 6px 15px;
+  font-size: 0.87rem;
+}
+
+.btn-arrow::after {
+  content: " \2192";
 }
 
 .link-arrow {
@@ -226,23 +321,35 @@ a:hover {
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
 }
 
+/* Logo on the left, links in the middle, buttons on the right */
 .nav-bar {
   height: var(--header-height);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 28px;
+}
+
+.logo {
+  flex-shrink: 0;
 }
 
 .logo img {
-  height: 58px;
+  height: 46px;
   width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 24px;
 }
 
 .nav-links {
   display: flex;
-  gap: 40px;
+  gap: 28px;
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
 }
 
@@ -250,7 +357,7 @@ a:hover {
   position: relative;
   color: var(--text);
   font-weight: 500;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   padding: 6px 0;
 }
 
@@ -275,9 +382,17 @@ a:hover {
   color: var(--sage);
 }
 
+.nav-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
 /* Hamburger button - hidden on desktop */
 .nav-toggle {
   display: none;
+  margin-left: auto;
   background: none;
   border: none;
   cursor: pointer;
@@ -296,39 +411,133 @@ a:hover {
 
 /* ---------- 4. Hero (home page) ---------- */
 .hero {
-  padding: 40px 0 70px;
-}
-
-.hero-card {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 40px;
-  align-items: center;
-  padding: 50px;
-  border: 1px solid var(--border);
-  border-radius: 28px;
+  position: relative;
   overflow: hidden;
+  isolation: isolate;
+  padding: 60px 0 44px;
+  text-align: center;
+}
+
+/* Background layers: colour wash, grid, circuit traces, cursor glow */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
-    radial-gradient(circle at 15% 20%, rgba(16, 76, 83, 0.55), transparent 55%),
-    radial-gradient(circle at 85% 90%, rgba(67, 95, 124, 0.45), transparent 50%),
-    var(--surface);
+    radial-gradient(circle at 12% 18%, rgba(16, 76, 83, 0.55), transparent 45%),
+    radial-gradient(circle at 88% 85%, rgba(67, 95, 124, 0.45), transparent 45%);
 }
 
-.hero-text h1 {
-  font-size: clamp(2.6rem, 6vw, 4.6rem);
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(113, 150, 137, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(113, 150, 137, 0.09) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: center top;
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 25%, transparent 80%);
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 25%, transparent 80%);
+}
+
+.hero-circuit {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-circuit .trace {
+  fill: none;
+  stroke: rgba(113, 150, 137, 0.25);
+  stroke-width: 1.5;
+}
+
+.hero-circuit .pad {
+  fill: var(--bg);
+  stroke: rgba(113, 150, 137, 0.5);
+  stroke-width: 1.5;
+}
+
+/* A short bright dash that travels along each trace (paths use pathLength="100") */
+.hero-circuit .pulse {
+  fill: none;
+  stroke: var(--sage);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 8 192;
+  stroke-dashoffset: 200;
+  animation: signal 6s linear infinite;
+  filter: drop-shadow(0 0 4px rgba(207, 213, 184, 0.8));
+}
+
+@keyframes signal {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Soft light that follows the mouse (position set by main.js) */
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 30%), rgba(113, 150, 137, 0.16), transparent 70%);
+}
+
+/* "> learn.build.connect()" typing line */
+.hero-terminal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 1.6em;
+  margin: 0 0 12px;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--turquoise);
+}
+
+.hero-terminal .prompt {
+  color: var(--sage);
+}
+
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.15em;
+  background: var(--sage);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
   font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35em;
 }
 
-/* Each word gets a different palette colour */
-.hero-text h1 .w1 { color: var(--beige); }
-.hero-text h1 .w2 { color: var(--sage); }
-.hero-text h1 .w3 { color: var(--light-blue); }
+/* Each word gets a different palette colour and rises in on load */
+.hero h1 span {
+  display: inline-block;
+  animation: rise 0.8s ease both;
+}
 
-.hero-text p {
+.hero h1 .w1 { color: var(--beige); }
+.hero h1 .w2 { color: var(--sage); animation-delay: 0.12s; }
+.hero h1 .w3 { color: var(--light-blue); animation-delay: 0.24s; }
+
+@keyframes rise {
+  from { opacity: 0; translate: 0 24px; }
+}
+
+.hero-lead {
+  max-width: 580px;
+  margin: 0 auto 26px;
   color: var(--muted);
-  font-size: 1.2rem;
-  max-width: 520px;
-  margin-bottom: 32px;
+  font-size: 1.02rem;
 }
 
 .hero-buttons {
@@ -337,43 +546,65 @@ a:hover {
   gap: 16px;
 }
 
-/* Vertical auto-scrolling photo strip */
-.photo-strip {
-  height: 520px;
+.hero .hero-buttons {
+  justify-content: center;
+}
+
+.hero .stats {
+  max-width: 900px;
+  margin: 40px auto 0;
+}
+
+.hero .stat {
+  background: rgba(22, 28, 28, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+
+/* ---------- 5. Photo band ---------- */
+/* main.js copies the photos until the row is wide enough, then slides it
+   left -> right by exactly one set so the loop has no visible jump. */
+.photo-band {
   overflow: hidden;
-  border-radius: var(--radius);
-  /* Fade the top and bottom edges */
-  -webkit-mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent);
+  padding-bottom: 20px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
 .photo-track {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  animation: scroll-up 28s linear infinite;
+  gap: 20px;
+  width: max-content;
 }
 
-.photo-strip:hover .photo-track {
+.photo-track.is-animated {
+  animation: scroll-right var(--band-duration, 40s) linear infinite;
+}
+
+.photo-band:hover .photo-track {
   animation-play-state: paused;
 }
 
-/* The list is duplicated in the HTML, so moving up by half loops seamlessly */
-@keyframes scroll-up {
-  from { transform: translateY(0); }
-  to   { transform: translateY(calc(-50% - 8px)); }
+@keyframes scroll-right {
+  from { transform: translateX(calc(-1 * var(--band-shift, 0px))); }
+  to   { transform: translateX(0); }
 }
 
 .photo-item {
   position: relative;
+  flex-shrink: 0;
+  width: 270px;
+  height: 180px;
+  margin: 0;
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  flex-shrink: 0;
 }
 
 .photo-item img {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.5s;
 }
@@ -385,22 +616,23 @@ a:hover {
 .photo-item figcaption {
   position: absolute;
   inset: auto 0 0 0;
-  padding: 30px 18px 14px;
+  padding: 26px 14px 10px;
+  font-size: 0.88rem;
   font-weight: 600;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
 }
 
 
-/* ---------- 5. Stats row ---------- */
+/* ---------- 6. Stats row ---------- */
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 16px;
 }
 
 .stat {
   text-align: center;
-  padding: 28px 16px;
+  padding: 16px 12px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--card);
@@ -408,27 +640,28 @@ a:hover {
 
 .stat-number {
   font-family: "Outfit", sans-serif;
-  font-size: 2.6rem;
+  font-size: 1.9rem;
   font-weight: 700;
   color: var(--sage);
 }
 
 .stat-label {
   color: var(--muted);
+  font-size: 0.88rem;
 }
 
 
-/* ---------- 6. Event cards ---------- */
+/* ---------- 7. Event cards ---------- */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
 }
 
 .event-card {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 14px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -445,7 +678,7 @@ a:hover {
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: var(--radius-sm);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   cursor: zoom-in;
 }
 
@@ -463,23 +696,24 @@ a:hover {
 .event-title {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 1.3rem;
-  margin-bottom: 8px;
+  gap: 10px;
+  font-size: 1.08rem;
+  margin-bottom: 6px;
 }
 
 .date-badge {
   flex-shrink: 0;
-  padding: 3px 10px;
+  padding: 2px 8px;
   border-radius: 6px;
   background: var(--mauve);
   color: var(--white);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
 .event-card p {
   color: var(--muted);
+  font-size: 0.9rem;
   margin: 0;
 }
 
@@ -487,9 +721,9 @@ a:hover {
 .event-meta {
   list-style: none;
   padding: 0;
-  margin: 12px 0 18px;
+  margin: 8px 0 14px;
   color: var(--muted-2);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
 }
 
 .event-meta li::before {
@@ -505,6 +739,7 @@ a:hover {
 
 .tag-upcoming {
   display: inline-block;
+  align-self: flex-start;
   margin-bottom: 10px;
   padding: 2px 10px;
   border-radius: 999px;
@@ -516,18 +751,173 @@ a:hover {
   text-transform: uppercase;
 }
 
+/* Countdown boxes (filled in by main.js from data-countdown) */
+.countdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 16px;
+}
 
-/* ---------- 7. About section ---------- */
+.countdown:empty {
+  display: none;
+}
+
+.countdown-unit {
+  min-width: 48px;
+  padding: 6px 4px;
+  text-align: center;
+  border: 1px solid var(--tint-border);
+  border-radius: 10px;
+  background: var(--tint);
+}
+
+.countdown-num {
+  display: block;
+  font-family: "Outfit", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--sage);
+}
+
+.countdown-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.countdown-done {
+  color: var(--muted-2);
+  font-size: 0.88rem;
+}
+
+
+/* ---------- 8. "What We Do" cards + feature card ---------- */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.pillar {
+  position: relative;
+  padding: 22px 20px;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Gradient line that grows across the top on hover */
+.pillar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--turquoise), var(--sage));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+
+.pillar:hover {
+  transform: translateY(-6px);
+  border-color: var(--turquoise);
+  box-shadow: var(--shadow);
+}
+
+.pillar:hover::before {
+  transform: scaleX(1);
+}
+
+.pillar h3 {
+  font-size: 1.1rem;
+}
+
+.pillar p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.pillar .pillar-examples {
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--turquoise);
+}
+
+/* Big card with a list of points ("Why Attend?") */
+.feature-card {
+  padding: 30px 32px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.feature-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.feature-card-head svg {
+  width: 26px;
+  height: 26px;
+  color: var(--turquoise);
+  flex-shrink: 0;
+}
+
+.feature-card-head h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+}
+
+.feature-item {
+  padding-left: 18px;
+  border-left: 2px solid var(--tint-border);
+  transition: border-color 0.3s;
+}
+
+.feature-item:hover {
+  border-color: var(--sage);
+}
+
+.feature-item h3 {
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.feature-item p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+
+/* ---------- 9. About section ---------- */
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 48px;
   align-items: center;
 }
 
 .about-text p {
   color: var(--muted);
-  font-size: 1.1rem;
+  font-size: 0.98rem;
 }
 
 .about-photo {
@@ -539,15 +929,15 @@ a:hover {
 
 .socials {
   display: flex;
-  gap: 14px;
-  margin-top: 28px;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .social-btn {
   display: grid;
   place-items: center;
-  width: 52px;
-  height: 52px;
+  width: 42px;
+  height: 42px;
   border: 1px solid var(--border);
   border-radius: 12px;
   color: var(--sage);
@@ -561,12 +951,11 @@ a:hover {
 }
 
 .social-btn svg {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
-
-/* ---------- 8. Sponsors strip ---------- */
+/* ---------- 10. Sponsors strip (home page) ---------- */
 .sponsors {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
@@ -575,7 +964,7 @@ a:hover {
 
 .sponsor-track {
   display: flex;
-  gap: 60px;
+  gap: 48px;
   width: max-content;
   animation: scroll-left 30s linear infinite;
 }
@@ -586,11 +975,11 @@ a:hover {
 
 @keyframes scroll-left {
   from { transform: translateX(0); }
-  to   { transform: translateX(calc(-50% - 30px)); }
+  to   { transform: translateX(calc(-50% - 24px)); }
 }
 
 .sponsor-track img {
-  height: 60px;
+  height: 46px;
   width: auto;
   opacity: 0.7;
   filter: grayscale(1);
@@ -603,27 +992,31 @@ a:hover {
 }
 
 
-/* ---------- 9. Join Us banner ---------- */
+/* ---------- 11. Join Us banner ---------- */
 .join-banner {
   text-align: center;
-  padding: 60px 30px;
-  border-radius: 28px;
+  padding: 40px 24px;
+  border-radius: 22px;
   background: linear-gradient(135deg, var(--green), var(--blue));
 }
 
 .join-banner h2 {
-  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
 }
 
 .join-banner p {
-  max-width: 600px;
-  margin: 0 auto 28px;
+  max-width: 560px;
+  margin: 0 auto 22px;
   color: var(--beige);
-  font-size: 1.1rem;
+  font-size: 0.98rem;
 }
 
 
-/* ---------- 10. Events page (filter + lightbox) ---------- */
+/* ---------- 12. Events page (filter + lightbox) ---------- */
+.why-attend {
+  margin-top: 44px;
+}
+
 .year-filter {
   display: flex;
   flex-wrap: wrap;
@@ -631,12 +1024,13 @@ a:hover {
 }
 
 .filter-btn {
-  padding: 8px 20px;
+  padding: 5px 16px;
   border-radius: 999px;
   border: 1px solid var(--border);
+  font-size: 0.88rem;
   background: transparent;
   color: var(--text);
-  font: inherit;
+  font-family: inherit;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
@@ -652,13 +1046,13 @@ a:hover {
 }
 
 .year-group {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .year-heading {
-  font-size: 1.6rem;
+  font-size: 1.25rem;
   color: var(--sage);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .year-group[hidden] {
@@ -701,21 +1095,21 @@ a:hover {
 }
 
 
-/* ---------- 11. Team page ---------- */
+/* ---------- 13. Team page ---------- */
 .team-group {
-  margin-bottom: 70px;
+  margin-bottom: 44px;
 }
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 28px;
-  margin-top: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
 }
 
 .member-card {
   text-align: center;
-  padding: 30px 20px;
+  padding: 20px 14px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -728,23 +1122,23 @@ a:hover {
 }
 
 .member-photo {
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 18px;
+  width: 104px;
+  height: 104px;
+  margin: 0 auto 12px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--turquoise);
 }
 
 .member-card h3 {
-  font-size: 1.25rem;
+  font-size: 1.08rem;
   margin-bottom: 2px;
 }
 
 .member-role {
   color: var(--sage);
-  font-size: 0.95rem;
-  margin-bottom: 12px;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
 }
 
 .member-link {
@@ -758,19 +1152,18 @@ a:hover {
 }
 
 
-/* ---------- 12. Contact page ---------- */
+/* ---------- 14. Contact page + FAQ ---------- */
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  margin-top: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
 }
 
 .contact-card {
   display: flex;
-  gap: 18px;
+  gap: 14px;
   align-items: center;
-  padding: 28px;
+  padding: 20px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -786,137 +1179,358 @@ a:hover {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   background: var(--green);
   color: var(--sage);
 }
 
 .contact-icon svg {
-  width: 26px;
-  height: 26px;
+  width: 21px;
+  height: 21px;
 }
 
 .contact-label {
   display: block;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   color: var(--muted);
   margin: 0;
 }
 
 .contact-value {
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 600;
   word-break: break-word;
 }
 
+/* FAQ uses <details>/<summary>, so it opens and closes without JavaScript */
+.faq {
+  display: grid;
+  gap: 10px;
+  max-width: 760px;
+  margin: 0 auto;
+}
 
-/* ---------- 13. Footer ---------- */
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: border-color 0.3s;
+}
+
+.faq-item[open],
+.faq-item:hover {
+  border-color: var(--turquoise);
+}
+
+.faq-item summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  font-family: "Outfit", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Chevron that flips when open */
+.faq-item summary::after {
+  content: "";
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  margin-top: -4px;
+  border-right: 2px solid var(--sage);
+  border-bottom: 2px solid var(--sage);
+  transform: rotate(45deg);
+  transition: transform 0.25s, margin 0.25s;
+}
+
+.faq-item[open] summary::after {
+  margin-top: 4px;
+  transform: rotate(-135deg);
+}
+
+.faq-item summary:focus-visible {
+  border-radius: 14px;
+}
+
+.faq-answer {
+  padding: 0 20px 16px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.faq-answer p:last-child {
+  margin: 0;
+}
+
+
+/* ---------- 15. Sponsors page ---------- */
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.partner-tile {
+  display: grid;
+  place-items: center;
+  height: 92px;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.partner-tile:hover {
+  transform: translateY(-4px);
+  border-color: var(--turquoise);
+  box-shadow: var(--shadow);
+}
+
+.partner-tile img {
+  max-height: 42px;
+  width: auto;
+  opacity: 0.85;
+  transition: opacity 0.3s;
+}
+
+.partner-tile:hover img {
+  opacity: 1;
+}
+
+.sponsor-stats {
+  margin-bottom: 32px;
+}
+
+.sponsor-cta {
+  text-align: center;
+}
+
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 44px;
+}
+
+.tier-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.tier-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--turquoise);
+}
+
+.tier-bar {
+  height: 5px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+.tier-bronze .tier-bar   { background: var(--bronze); }
+.tier-silver .tier-bar   { background: var(--silver); }
+.tier-gold .tier-bar     { background: var(--gold); }
+.tier-platinum .tier-bar { background: var(--platinum); }
+
+.tier-name {
+  font-size: 1.15rem;
+  margin-bottom: 2px;
+}
+
+.tier-price {
+  margin-bottom: 16px;
+  font-family: "Outfit", sans-serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--sage);
+}
+
+.tier-perks {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 0.87rem;
+}
+
+.tier-perks li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.tier-perks li::before {
+  content: "";
+  position: absolute;
+  top: 0.6em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--turquoise);
+}
+
+.tier-card .btn {
+  margin-top: auto;
+}
+
+.tier-featured {
+  border-color: var(--turquoise);
+  box-shadow: 0 0 0 1px var(--turquoise), 0 20px 50px rgba(16, 76, 83, 0.35);
+}
+
+.tier-badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px 14px;
+  border-radius: 999px;
+  background: var(--turquoise);
+  color: #000;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tier-note {
+  margin-top: 28px;
+  text-align: center;
+  color: var(--muted);
+}
+
+
+/* ---------- 16. Footer ---------- */
 .site-footer {
-  margin-top: 40px;
-  padding: 50px 0 30px;
+  margin-top: 24px;
+  padding: 24px 0;
   border-top: 1px solid var(--border);
   background: var(--surface);
 }
 
+/* Copyright on the left, logo on the right */
 .footer-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 30px;
+  align-items: center;
+  gap: 16px 30px;
 }
 
 .footer-grid img {
-  height: 54px;
+  height: 42px;
   width: auto;
-}
-
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-links a {
-  color: var(--muted);
+  margin-left: auto; /* stays on the right even when it wraps on phones */
 }
 
 .footer-bottom {
-  margin-top: 30px;
+  margin: 0;
   color: var(--muted-2);
-  font-size: 0.9rem;
+  font-size: 0.82rem;
 }
 
 
-/* ---------- 14. Scroll animations ---------- */
-/* Elements with class "reveal" fade up when they scroll into view */
+/* ---------- 17. Scroll animations ---------- */
+/* Elements with class "reveal" fade up when they scroll into view.
+   This uses an animation on "translate" (not a transition on "transform"),
+   so card hover effects keep working after the reveal. */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .reveal.visible {
   opacity: 1;
-  transform: none;
+  animation: reveal-up 0.7s ease both;
+  animation-delay: var(--reveal-delay, 0s);
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; translate: 0 30px; }
+  to   { opacity: 1; translate: 0 0; }
 }
 
 /* Respect users who prefer less motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
-  .photo-track,
+  .reveal { opacity: 1; }
+  .reveal.visible,
+  .hero h1 span,
+  .caret,
+  .hero-circuit .pulse,
+  .photo-track.is-animated,
   .sponsor-track { animation: none; }
+  .hero-circuit .pulse { display: none; }
+  .photo-band { overflow-x: auto; }
 }
 
 
-/* ---------- 15. Mobile / small screens ---------- */
-@media (max-width: 900px) {
-  .hero-card,
-  .about {
-    grid-template-columns: 1fr;
+/* ---------- 18. Mobile / small screens ---------- */
+@media (max-width: 1100px) {
+  .tier-grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 36px;
   }
+}
 
-  .hero-card {
-    padding: 32px 24px;
-  }
-
-  .photo-strip {
-    height: 380px;
-  }
-
-  .stats {
+@media (max-width: 1000px) {
+  .pillar-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 768px) {
+/* The header switches to the hamburger menu */
+@media (max-width: 960px) {
   .nav-toggle {
     display: block;
   }
 
-  /* Menu drops down below the header */
-  .nav-links {
+  /* Links and buttons drop down below the header */
+  .nav-menu {
     position: absolute;
     top: var(--header-height);
     left: 0;
     right: 0;
+    display: none;
     flex-direction: column;
+    align-items: stretch;
     gap: 0;
-    padding: 10px 24px 20px;
+    padding: 10px 24px 24px;
     background: rgba(11, 11, 11, 0.97);
     border-bottom: 1px solid var(--border);
-    display: none;
   }
 
-  .nav-links.open {
+  .nav-menu.open {
     display: flex;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
   }
 
   .nav-links a {
@@ -924,25 +1538,88 @@ a:hover {
     padding: 14px 0;
   }
 
+  .nav-links a::after {
+    bottom: 8px;
+  }
+
+  .nav-cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
   /* Turn the hamburger into an X */
   .nav-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
   .nav-toggle.open span:nth-child(2) { opacity: 0; }
   .nav-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
 
+@media (max-width: 900px) {
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
   .logo img {
-    height: 46px;
+    height: 40px;
   }
 
   .section {
-    padding: 60px 0;
+    padding: 48px 0;
   }
 
   .section-title {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 
   .section-title::after {
-    width: 60px;
+    width: 50px;
+  }
+
+  .hero {
+    padding: 44px 0 36px;
+  }
+
+  .hero .stats {
+    margin-top: 32px;
+  }
+
+  .hero-terminal {
+    font-size: 0.8rem;
+  }
+
+  .page-hero {
+    padding: 40px 0 28px;
+  }
+
+  .photo-item {
+    width: 210px;
+    height: 140px;
+  }
+
+  .feature-card {
+    padding: 22px 18px;
+  }
+
+  .feature-card-head h2 {
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .pillar-grid,
+  .tier-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -951,16 +1628,24 @@ a:hover {
     padding: 0 16px;
   }
 
+  .nav-menu {
+    padding: 10px 16px 24px;
+  }
+
   .stats {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
 
   .stat-number {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   .card-grid {
     grid-template-columns: 1fr;
+  }
+
+  .countdown-unit {
+    min-width: 46px;
   }
 }

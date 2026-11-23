@@ -19,31 +19,44 @@
 
   <!-- Header  -->
   <header class="site-header">
-    <nav class="container nav-bar">
+    <nav class="container nav-bar" aria-label="Main">
       <a href="../" class="logo"><img src="../assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter"></a>
 
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
         <span></span><span></span><span></span>
       </button>
 
-      <ul class="nav-links">
-        <li><a href="../">Home</a></li>
-        <li><a href="../events/">Events</a></li>
-        <li><a href="../team/">Team</a></li>
-        <li><a href="../contact/" class="active">Contact</a></li>
-      </ul>
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-links">
+          <li><a href="../">Home</a></li>
+          <li><a href="../events/">Events</a></li>
+          <li><a href="../team/">Team</a></li>
+          <li><a href="../sponsors/">Sponsors</a></li>
+          <li><a href="../contact/" class="active" aria-current="page">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="../sponsors/#sponsor-us" class="btn btn-outline btn-sm">Sponsor Us</a>
+          <a href="https://linktr.ee/IEEECSTMC" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Join Us</a>
+        </div>
+      </div>
     </nav>
   </header>
 
   <main>
 
-    <section class="section">
-      <div class="container">
+    <section class="page-hero">
+      <div class="hero-bg" aria-hidden="true"><div class="hero-grid"></div></div>
+      <div class="container section-intro">
+        <p class="eyebrow reveal">Say hello</p>
         <h1 class="page-title reveal">Contact Us</h1>
-        <p class="page-intro reveal">Reach out and connect if you have questions, ideas, or want to collaborate.</p>
+        <p class="lead reveal">Reach out and connect if you have questions, ideas, or want to collaborate.</p>
+      </div>
+    </section>
 
+    <section>
+      <div class="container">
         <div class="contact-grid">
-          <a class="contact-card reveal" href="mailto:ieee.comp@mues.ca">
+          <a class="contact-card reveal" href="mailto:ieee.comp@torontomu.ca">
             <span class="contact-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
             </span>
@@ -76,21 +89,69 @@
       </div>
     </section>
 
+    <!--  FAQ (to add a question, copy one <details> block)
+          TODO: confirm these draft answers with the exec team  -->
+    <section class="section">
+      <div class="container">
+        <div class="section-intro reveal">
+          <p class="eyebrow">Good to know</p>
+          <h2>Frequently Asked Questions</h2>
+          <p class="lead">Quick answers to the questions students ask us most.</p>
+        </div>
+
+        <div class="faq">
+          <details class="faq-item reveal">
+            <summary>Who can join IEEE CSTMC?</summary>
+            <div class="faq-answer">
+              <p>Any TMU student is welcome at our events, whatever your program or year. Most of our members study engineering or computer science, but you don't have to.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Do events cost anything?</summary>
+            <div class="faq-answer">
+              <p>Most of our events are free for TMU students. If an event has a fee or limited spots, we'll say so on the sign-up page.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Do I need any experience?</summary>
+            <div class="faq-answer">
+              <p>No. Our workshops are built for beginners and walk you through everything step by step. If you already know your stuff, come anyway: it's a great way to meet people and help others.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>How do I hear about upcoming events?</summary>
+            <div class="faq-answer">
+              <p>Follow <a href="https://www.instagram.com/ieeecstmc/" target="_blank" rel="noopener">@ieeecstmc on Instagram</a> and join our <a href="https://ieeecstmc.us5.list-manage.com/subscribe?u=8fe68dee492ba1ed018e6572e&id=c52763f709" target="_blank" rel="noopener">mailing list</a>. Every event is posted there first, and you can also check our <a href="../events/">Events page</a>.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>How can I join the executive team?</summary>
+            <div class="faq-answer">
+              <p>We recruit new executives and first-year representatives (FYRs) each school year. Keep an eye on our Instagram for applications, or email us to ask about open roles.</p>
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>My company wants to sponsor or partner with you. Where do I start?</summary>
+            <div class="faq-answer">
+              <p>We'd love to hear from you. See our sponsorship tiers on the <a href="../sponsors/">Sponsors page</a>, or email us at <a href="mailto:ieee.comp@torontomu.ca">ieee.comp@torontomu.ca</a>.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ===== Footer ===== -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <img src="../assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter">
-        <ul class="footer-links">
-          <li><a href="../">Home</a></li>
-          <li><a href="../events/">Events</a></li>
-          <li><a href="../team/">Team</a></li>
-          <li><a href="../contact/">Contact</a></li>
-        </ul>
-      </div>
+    <div class="container footer-grid">
       <p class="footer-bottom">&copy; <span id="year"></span> IEEE Computer Society Toronto Metropolitan Chapter</p>
+      <img src="../assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter">
     </div>
   </footer>
 

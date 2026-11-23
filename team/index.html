@@ -18,28 +18,37 @@
 
   <!--  Header  -->
   <header class="site-header">
-    <nav class="container nav-bar">
+    <nav class="container nav-bar" aria-label="Main">
       <a href="../" class="logo"><img src="../assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter"></a>
 
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
         <span></span><span></span><span></span>
       </button>
 
-      <ul class="nav-links">
-        <li><a href="../">Home</a></li>
-        <li><a href="../events/">Events</a></li>
-        <li><a href="../team/" class="active">Team</a></li>
-        <li><a href="../contact/">Contact</a></li>
-      </ul>
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-links">
+          <li><a href="../">Home</a></li>
+          <li><a href="../events/">Events</a></li>
+          <li><a href="../team/" class="active" aria-current="page">Team</a></li>
+          <li><a href="../sponsors/">Sponsors</a></li>
+          <li><a href="../contact/">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="../sponsors/#sponsor-us" class="btn btn-outline btn-sm">Sponsor Us</a>
+          <a href="https://linktr.ee/IEEECSTMC" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Join Us</a>
+        </div>
+      </div>
     </nav>
   </header>
 
   <main>
 
-    <section class="section">
-      <div class="container">
+    <section class="page-hero">
+      <div class="hero-bg" aria-hidden="true"><div class="hero-grid"></div></div>
+      <div class="container section-intro">
+        <p class="eyebrow reveal">2026&ndash;27 Executive Team</p>
         <h1 class="page-title reveal">Our Team</h1>
-        <p class="page-intro reveal">The students behind IEEE CSTMC.</p>
+        <p class="lead reveal">The students behind IEEE CSTMC.</p>
       </div>
     </section>
 
@@ -228,17 +237,9 @@
 
   <!--  Footer  -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <img src="../assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter">
-        <ul class="footer-links">
-          <li><a href="../">Home</a></li>
-          <li><a href="../events/">Events</a></li>
-          <li><a href="../team/">Team</a></li>
-          <li><a href="../contact/">Contact</a></li>
-        </ul>
-      </div>
+    <div class="container footer-grid">
       <p class="footer-bottom">&copy; <span id="year"></span> IEEE Computer Society Toronto Metropolitan Chapter</p>
+      <img src="../assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter">
     </div>
   </footer>
 

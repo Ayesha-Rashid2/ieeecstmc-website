@@ -1,14 +1,28 @@
 
-/* Open / close the mobile hamburger menu */
+/* True when the visitor has asked their device for less animation */
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+
+/* Open / close the mobile menu (links + Sponsor Us / Join Us buttons) */
 function setupMobileNav() {
   const toggle = document.querySelector(".nav-toggle");
-  const links = document.querySelector(".nav-links");
-  if (!toggle || !links) return;
+  const menu = document.querySelector(".nav-menu");
+  if (!toggle || !menu) return;
 
-  toggle.addEventListener("click", function () {
-    const isOpen = links.classList.toggle("open");
+  function setOpen(isOpen) {
+    menu.classList.toggle("open", isOpen);
     toggle.classList.toggle("open", isOpen);
     toggle.setAttribute("aria-expanded", isOpen);
+    toggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+  }
+
+  toggle.addEventListener("click", function () {
+    setOpen(!menu.classList.contains("open"));
+  });
+
+  // Close the menu after picking a link (matters for same-page links like #sponsor-us)
+  menu.addEventListener("click", function (e) {
+    if (e.target.closest("a")) setOpen(false);
   });
 }
 
@@ -24,17 +38,19 @@ function setupHeaderScroll() {
 }
 
 
-/* Fade elements with class "reveal" in as they scroll into view */
+/* Fade elements with class "reveal" in as they scroll into view.
+   Items that appear at the same time (like a row of cards) are staggered. */
 function setupRevealOnScroll() {
   const items = document.querySelectorAll(".reveal");
 
   const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
+    entries
+      .filter(function (entry) { return entry.isIntersecting; })
+      .forEach(function (entry, i) {
+        entry.target.style.setProperty("--reveal-delay", (Math.min(i, 5) * 90) + "ms");
         entry.target.classList.add("visible");
         observer.unobserve(entry.target); // only animate once
-      }
-    });
+      });
   }, { threshold: 0.15 });
 
   items.forEach(function (item) {
@@ -73,6 +89,193 @@ function setupCounters() {
   counters.forEach(function (counter) {
     observer.observe(counter);
   });
+}
+
+
+/* Home page photo band: photos slide left -> right forever.
+   The HTML lists each photo once. Here we copy the set until the row is
+   wider than the screen plus one set, then slide it by exactly one set
+   so the loop has no visible jump. Re-runs when the window is resized. */
+function setupPhotoBand() {
+  const band = document.querySelector(".photo-band");
+  if (!band || reduceMotion) return;
+
+  const track = band.querySelector(".photo-track");
+  const originals = Array.from(track.children);
+  if (!originals.length) return;
+
+  function addCopy() {
+    originals.forEach(function (item) {
+      const copy = item.cloneNode(true);
+      copy.setAttribute("aria-hidden", "true");
+      copy.setAttribute("data-copy", "");
+      copy.querySelectorAll("img").forEach(function (img) { img.alt = ""; });
+      track.appendChild(copy);
+    });
+  }
+
+  function build() {
+    track.classList.remove("is-animated");
+    track.querySelectorAll("[data-copy]").forEach(function (copy) { copy.remove(); });
+
+    // One copy is always needed so we can measure the width of a full set
+    addCopy();
+    const setWidth = track.children[originals.length].offsetLeft - track.children[0].offsetLeft;
+    if (setWidth <= 0) return;
+
+    let copies = 1;
+    while (track.offsetWidth < setWidth + band.offsetWidth && copies < 20) {
+      addCopy();
+      copies++;
+    }
+
+    track.style.setProperty("--band-shift", setWidth + "px");
+    track.style.setProperty("--band-duration", (setWidth / 45) + "s"); // ~45px per second
+    track.classList.add("is-animated");
+  }
+
+  build();
+
+  let lastWidth = window.innerWidth;
+  let timer = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      if (window.innerWidth === lastWidth) return; // ignore height-only changes (mobile toolbars)
+      lastWidth = window.innerWidth;
+      build();
+    }, 200);
+  });
+}
+
+
+/* Home page hero: soft glow follows the mouse */
+function setupHeroGlow() {
+  const hero = document.querySelector(".hero");
+  if (!hero || reduceMotion || !window.matchMedia("(pointer: fine)").matches) return;
+
+  let frame = null;
+  hero.addEventListener("pointermove", function (e) {
+    if (frame) return;
+    frame = requestAnimationFrame(function () {
+      const rect = hero.getBoundingClientRect();
+      hero.style.setProperty("--mx", (e.clientX - rect.left) + "px");
+      hero.style.setProperty("--my", (e.clientY - rect.top) + "px");
+      frame = null;
+    });
+  });
+}
+
+
+/* Home page hero: types and deletes each phrase in data-words (split by |) */
+function setupTyping() {
+  const el = document.querySelector(".typed");
+  if (!el) return;
+
+  const words = (el.dataset.words || "").split("|").filter(Boolean);
+  if (!words.length || reduceMotion) return; // keep the text written in the HTML
+
+  let wordIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+  el.textContent = "";
+
+  function step() {
+    const word = words[wordIndex];
+    charIndex += deleting ? -1 : 1;
+    el.textContent = word.slice(0, charIndex);
+
+    let delay = deleting ? 40 : 85;
+    if (!deleting && charIndex === word.length) {
+      deleting = true;
+      delay = 1800; // pause on the full phrase
+    } else if (deleting && charIndex === 0) {
+      deleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      delay = 400;
+    }
+    setTimeout(step, delay);
+  }
+
+  setTimeout(step, 600);
+}
+
+
+/* Countdown to an event.
+   Usage: <div class="countdown" data-countdown="2026-11-04T18:00:00"></div>
+   The time is the visitor's local time. Once it passes, a short message shows instead
+   (change it with data-ended-text="..."). */
+function setupCountdowns() {
+  const elements = document.querySelectorAll("[data-countdown]");
+  if (!elements.length) return;
+
+  const UNITS = [
+    ["Days", 86400000],
+    ["Hours", 3600000],
+    ["Mins", 60000],
+    ["Secs", 1000]
+  ];
+
+  const timers = Array.from(elements).map(function (el) {
+    el.textContent = "";
+    const target = new Date(el.dataset.countdown).getTime();
+
+    const numbers = UNITS.map(function (unit) {
+      const box = document.createElement("span");
+      box.className = "countdown-unit";
+      const num = document.createElement("span");
+      num.className = "countdown-num";
+      const label = document.createElement("span");
+      label.className = "countdown-label";
+      label.textContent = unit[0];
+      box.append(num, label);
+      el.appendChild(box);
+      return num;
+    });
+
+    return { el: el, target: target, numbers: numbers, finished: false };
+  });
+
+  function finish(timer) {
+    timer.finished = true;
+    timer.el.textContent = "";
+    const message = document.createElement("span");
+    message.className = "countdown-done";
+    message.textContent = timer.el.dataset.endedText || "This event has started. Stay tuned for the next one!";
+    timer.el.appendChild(message);
+  }
+
+  function tick() {
+    const now = Date.now();
+
+    timers.forEach(function (timer) {
+      if (timer.finished) return;
+      if (isNaN(timer.target)) {
+        // Bad date written in the HTML: hide instead of showing nonsense
+        timer.finished = true;
+        timer.el.hidden = true;
+        return;
+      }
+
+      let remaining = timer.target - now;
+      if (remaining <= 0) {
+        finish(timer);
+        return;
+      }
+
+      UNITS.forEach(function (unit, i) {
+        const value = Math.floor(remaining / unit[1]);
+        remaining -= value * unit[1];
+        timer.numbers[i].textContent = i === 0 ? value : String(value).padStart(2, "0");
+      });
+    });
+
+    if (timers.some(function (timer) { return !timer.finished; })) {
+      setTimeout(tick, 1000);
+    }
+  }
+
+  tick();
 }
 
 
@@ -136,6 +339,10 @@ document.addEventListener("DOMContentLoaded", function () {
   setupHeaderScroll();
   setupRevealOnScroll();
   setupCounters();
+  setupPhotoBand();
+  setupHeroGlow();
+  setupTyping();
+  setupCountdowns();
   setupYearFilter();
   setupLightbox();
   setFooterYear();

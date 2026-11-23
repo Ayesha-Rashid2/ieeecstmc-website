@@ -2,152 +2,169 @@
 <html lang="en">
 <head>
 
-  <!-- Meta tags -->  
+  <!-- Meta tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IEEE CSTMC | Learn. Build. Connect.</title>
   <meta name="description" content="IEEE Computer Society Toronto Metropolitan Chapter - a student-driven community for software, hardware and emerging tech.">
   <link rel="icon" href="assets/images/logo.svg">
 
-  <!-- Fonts -->
+  <!-- Fonts (JetBrains Mono is only used for the typing line in the hero) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!--  Header (same on every page - note remember to update all 4 pages)  -->
+  <!--  Header (same on every page - note remember to update all 5 pages)  -->
   <header class="site-header">
-    <nav class="container nav-bar">
+    <nav class="container nav-bar" aria-label="Main">
       <a href="./" class="logo"><img src="assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter"></a>
 
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
         <span></span><span></span><span></span>
       </button>
 
-      <!-- Navigation links -->
-      <ul class="nav-links">
-        <li><a href="./" class="active">Home</a></li>
-        <li><a href="events/">Events</a></li>
-        <li><a href="team/">Team</a></li>
-        <li><a href="contact/">Contact</a></li>
-      </ul>
+      <!-- Navigation links + buttons (becomes the dropdown on phones) -->
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-links">
+          <li><a href="./" class="active" aria-current="page">Home</a></li>
+          <li><a href="events/">Events</a></li>
+          <li><a href="team/">Team</a></li>
+          <li><a href="sponsors/">Sponsors</a></li>
+          <li><a href="contact/">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="sponsors/#sponsor-us" class="btn btn-outline btn-sm">Sponsor Us</a>
+          <a href="https://linktr.ee/IEEECSTMC" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Join Us</a>
+        </div>
+      </div>
     </nav>
   </header>
 
   <main>
 
-    <!--  Hero Burger Styled Class (For ) -->
+    <!--  Hero  -->
     <section class="hero">
+      <!-- Decorative background: grid, circuit traces with travelling signals, mouse glow -->
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-grid"></div>
+        <svg class="hero-circuit" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice">
+          <!-- left side -->
+          <path class="trace" d="M0 140 H180 L240 200 H330"/>
+          <path class="trace" d="M0 430 H110 L170 370 H290 L330 330"/>
+          <path class="trace" d="M70 720 V610 L130 550 H250"/>
+          <path class="trace" d="M0 270 H70 L110 310 V470 L150 510 H200"/>
+          <!-- right side -->
+          <path class="trace" d="M1440 120 H1260 L1200 180 H1110"/>
+          <path class="trace" d="M1440 410 H1330 L1270 470 H1150 L1110 510"/>
+          <path class="trace" d="M1370 720 V600 L1310 540 H1190"/>
+          <path class="trace" d="M1440 280 H1370 L1330 240 V90 L1290 50 H1220"/>
+
+          <!-- signals (same paths; pathLength lets one dash size fit every trace) -->
+          <path class="pulse" pathLength="100" d="M0 140 H180 L240 200 H330"/>
+          <path class="pulse" pathLength="100" d="M0 430 H110 L170 370 H290 L330 330" style="animation-duration:7s; animation-delay:-2s"/>
+          <path class="pulse" pathLength="100" d="M70 720 V610 L130 550 H250" style="animation-duration:5s; animation-delay:-4s"/>
+          <path class="pulse" pathLength="100" d="M0 270 H70 L110 310 V470 L150 510 H200" style="animation-duration:8s; animation-delay:-1s"/>
+          <path class="pulse" pathLength="100" d="M1440 120 H1260 L1200 180 H1110" style="animation-duration:6.5s; animation-delay:-3s"/>
+          <path class="pulse" pathLength="100" d="M1440 410 H1330 L1270 470 H1150 L1110 510" style="animation-duration:5.5s"/>
+          <path class="pulse" pathLength="100" d="M1370 720 V600 L1310 540 H1190" style="animation-duration:7.5s; animation-delay:-5s"/>
+          <path class="pulse" pathLength="100" d="M1440 280 H1370 L1330 240 V90 L1290 50 H1220" style="animation-duration:9s; animation-delay:-2.5s"/>
+
+          <!-- pads at the end of each trace -->
+          <circle class="pad" cx="330" cy="200" r="5"/>
+          <circle class="pad" cx="330" cy="330" r="5"/>
+          <circle class="pad" cx="250" cy="550" r="5"/>
+          <circle class="pad" cx="200" cy="510" r="5"/>
+          <circle class="pad" cx="1110" cy="180" r="5"/>
+          <circle class="pad" cx="1110" cy="510" r="5"/>
+          <circle class="pad" cx="1190" cy="540" r="5"/>
+          <circle class="pad" cx="1220" cy="50" r="5"/>
+        </svg>
+        <div class="hero-glow"></div>
+      </div>
+
       <div class="container">
-        <div class="hero-card">
-          <div class="hero-text">
-            <p class="eyebrow">IEEE Computer Society &middot; TMU</p>
-            <h1><span class="w1">Learn.</span> <span class="w2">Build.</span> <span class="w3">Connect.</span></h1>
-            <p>IEEE CSTMC is a student-driven community advancing software, hardware, and emerging technologies skills through collaborative projects, workshops, and industry engagement.</p>
-            <div class="hero-buttons">
-              <a href="events/" class="btn btn-primary">Join Events</a>
-              <a href="team/" class="btn btn-outline">Meet the Team</a>
-            </div>
-          </div>
+        <p class="eyebrow">IEEE Computer Society &middot; TMU</p>
 
-          <!-- Auto-scrolling photos. The list is written twice so the loop is seamless. -->
-          <div class="photo-strip">
-            <div class="photo-track">
-              <figure class="photo-item"><img src="assets/images/hero/industry_night.jpg" alt="Students networking at Industry Night"><figcaption>Industry Night</figcaption></figure>
-              <figure class="photo-item"><img src="assets/images/hero/ECE.jpg" alt="ECE Meet & Greet"><figcaption>ECE Meet & Greet</figcaption></figure>
-              <figure class="photo-item"><img src="assets/images/hero/SWF.jpg" alt="SWF"><figcaption>Software Fundamentals Workshop</figcaption></figure>
-              <figure class="photo-item"><img src="assets/images/hero/PC.jpg" alt="PC"><figcaption>PC Building Workshop</figcaption></figure>
-             
-              <!-- duplicate set (hidden from screen readers) -->
-              <figure class="photo-item" aria-hidden="true"><img src="assets/images/hero/industry_night.jpg" alt=""><figcaption>Industry Night</figcaption></figure>
-              <figure class="photo-item" aria-hidden="true"><img src="assets/images/hero/ECE.jpg" alt=""><figcaption>ECE Meet & Greet</figcaption></figure>
-              <figure class="photo-item" aria-hidden="true"><img src="assets/images/hero/SWF.jpg" alt=""><figcaption>Software Fundamentals Workshop</figcaption></figure>
-              <figure class="photo-item" aria-hidden="true"><img src="assets/images/hero/PC.jpg" alt=""><figcaption>PC Building Workshop</figcaption></figure>
-            
-            </div>
-          </div>
+        <!-- Typing line: add or change phrases in data-words, separated by | -->
+        <p class="hero-terminal" aria-hidden="true">
+          <span class="prompt">&gt;</span>
+          <span><span class="typed" data-words="learn.build.connect()|npm run workshop|git commit -m &quot;join cstmc&quot;|ping industry-night">learn.build.connect()</span><span class="caret"></span></span>
+        </p>
+
+        <h1><span class="w1">Learn.</span> <span class="w2">Build.</span> <span class="w3">Connect.</span></h1>
+        <p class="hero-lead">IEEE CSTMC is a student-driven community advancing software, hardware, and emerging technologies skills through collaborative projects, workshops, and industry engagement.</p>
+        <div class="hero-buttons">
+          <a href="events/" class="btn btn-primary">Join Events</a>
+          <a href="team/" class="btn btn-outline">Meet the Team</a>
         </div>
+
+        <!--  Stats (numbers count up on scroll - edit data-target to actual numbers)  -->
+        <div class="stats">
+          <div class="stat"><span class="stat-number" data-target="50" data-suffix="+">0</span><div class="stat-label">Events Hosted</div></div>
+          <div class="stat"><span class="stat-number" data-target="500" data-suffix="+">0</span><div class="stat-label">Students Reached</div></div>
+          <div class="stat"><span class="stat-number" data-target="10" data-suffix="+">0</span><div class="stat-label">Industry Partners</div></div>
+          <div class="stat"><span class="stat-number" data-target="20" data-suffix="">0</span><div class="stat-label">Executive Members</div></div>
+        </div>
+       </div>
+    </section>
+
+    <!--  Photo band: slides left -> right. List each photo ONCE - main.js handles the loop.  -->
+    <section class="photo-band" aria-label="Photos from past events">
+      <div class="photo-track">
+        <figure class="photo-item"><img src="assets/images/hero/industry_night.jpg" alt="Students networking at Industry Night"><figcaption>Industry Night</figcaption></figure>
+        <figure class="photo-item"><img src="assets/images/hero/ECE.jpg" alt="ECE Meet & Greet"><figcaption>ECE Meet &amp; Greet</figcaption></figure>
+        <figure class="photo-item"><img src="assets/images/hero/SWF.jpg" alt="Software Fundamentals Workshop"><figcaption>Software Fundamentals Workshop</figcaption></figure>
+        <figure class="photo-item"><img src="assets/images/hero/PC.jpg" alt="PC Building Workshop"><figcaption>PC Building Workshop</figcaption></figure>
       </div>
     </section>
 
-    <!--  Stats (numbers count up on scroll - edit data-target to actual numbers)  -->
-    <section class="container reveal">
-      <div class="stats">
-        <div class="stat"><span class="stat-number" data-target="50" data-suffix="+">0</span><div class="stat-label">Events Hosted</div></div>
-        <div class="stat"><span class="stat-number" data-target="500" data-suffix="+">0</span><div class="stat-label">Students Reached</div></div>
-        <div class="stat"><span class="stat-number" data-target="10" data-suffix="+">0</span><div class="stat-label">Industry Partners</div></div>
-        <div class="stat"><span class="stat-number" data-target="20" data-suffix="">0</span><div class="stat-label">Executive Members</div></div>
-      </div>
-    </section>
-
-    <!--  Upcoming events  -->
+    <!--  What we do  -->
     <section class="section">
       <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">Don't miss out</p>
-            <h2 class="section-title">Upcoming Events</h2>
-          </div>
-          <a href="events/" class="link-arrow">See all events</a>
+        <div class="section-intro reveal">
+          <p class="eyebrow">What we do</p>
+          <h2>Four ways to level up</h2>
+          <p class="lead">From your first line of code to your first job offer, our events help you learn, build and connect.</p>
         </div>
 
-        <div class="card-grid">
-          <!-- TO create a new event, copy the following article block -->
-          <article class="event-card reveal">
-            <div class="event-poster"><img src="assets/images/events/SWFWorkshop.png" alt="Software Fundamentals Series"></div>
-            <span class="tag-upcoming">Upcoming</span>
-            <h3 class="event-title"><span class="date-badge">November 4,5, 11 & 12</span>Software Fundamentals Workshop Series</h3>
-            <ul class="event-meta">
-              <li>6:00 PM &ndash; 8:00 PM</li>
-              <li>George Vari Engineering &amp; Computing Centre</li>
-            </ul>
-            <a href="https://linktr.ee/IEEECSTMC?utm_source=linktree_profile_share&ltsid=d2d36359-6abe-4a47-912a-0e92fa278164" target="_blank" rel="noopener" class="btn btn-primary">Register</a>
+        <div class="pillar-grid">
+          <article class="pillar reveal">
+            <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></span>
+            <h3>Workshops</h3>
+            <p>Hands-on sessions where you build something real, from Arduino circuits to your first PC.</p>
+            <p class="pillar-examples">Arduino &middot; PC Building &middot; Software Fundamentals</p>
           </article>
-          
-        </div>
-      </div>
-    </section>
 
-    <!--  Recent events  -->
-    <section class="section section-alt">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">What we've been up to</p>
-            <h2 class="section-title">Recent Events</h2>
-          </div>
-          <a href="events/" class="link-arrow">Browse the archive</a>
-        </div>
+          <article class="pillar reveal">
+            <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+            <h3>Industry Nights</h3>
+            <p>Meet engineers and recruiters from companies like Bell, Deloitte, AWS and TELUS.</p>
+            <p class="pillar-examples">Industry Night 2025 &middot; 2026</p>
+          </article>
 
-        <div class="card-grid">
-          <!-- TO create a new event, copy the following article block -->
-           <article class="event-card reveal">
-              <div class="event-poster"><img src="assets/images/events/mythbusters.png" alt="Career Mythbusters Panel poster"></div>
-              <h3 class="event-title"><span class="date-badge">Oct 26</span> Career Mythbusters Panel</h3>
-              <p>Hot-seat game show with panelists in the industry.</p>
-            </article>
+          <article class="pillar reveal">
+            <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+            <h3>Career Panels</h3>
+            <p>Straight answers about internships, resumes and interviews from people who've been there.</p>
+            <p class="pillar-examples">Career Mythbusters &middot; Resume Mastery</p>
+          </article>
 
-            <article class="event-card reveal">
-              <div class="event-poster"><img src="assets/images/events/ece_poster.png" alt="ECE Meet & Greet poster"></div>
-              <h3 class="event-title"><span class="date-badge">Oct 13</span> ECE Meet & Greet</h3>
-              <p>Connect with faculty and peers in the Electrical and Computer Engineering department.</p>
-            </article>
-
-            <article class="event-card reveal">
-              <div class="event-poster"><img src="assets/images/events/arduino_poster.png" alt="Arduino Workshop"></div>
-              <h3 class="event-title"><span class="date-badge">Mar 10 & 12</span> Arduino Workshop</h3>
-              <p>Learn the basics of Arduino programming and build your first project.</p>
-            </article>
-
+          <article class="pillar reveal">
+            <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <h3>Community</h3>
+            <p>Meet ECE and CS students who share your interests, and make friends along the way.</p>
+            <p class="pillar-examples">ECE Meet &amp; Greet</p>
+          </article>
         </div>
       </div>
     </section>
 
     <!--  About  -->
-    <section class="section" id="about">
+    <section class="section section-alt" id="about">
       <div class="container about">
         <div class="about-text reveal">
           <p class="eyebrow">Mission &amp; Vision</p>
@@ -166,15 +183,15 @@
         </div>
 
         <div class="about-photo reveal">
-          <img src="assets/images/about/group-photo.svg" alt="IEEE CSTMC executive team group photo">
+          <img src="assets/images/team/team_photo.jpg" alt="IEEE CSTMC executive team group photo">
         </div>
       </div>
     </section>
 
     <!--  Sponsors (list is written twice for a seamless loop)  -->
-    <section class="section section-alt">
+    <section class="section">
       <div class="container">
-        <div class="reveal" style="text-align:center; margin-bottom:40px;">
+        <div class="section-intro reveal">
           <p class="eyebrow">Who we've worked with</p>
           <h2>Our Partners</h2>
         </div>
@@ -199,6 +216,7 @@
             <img src="assets/images/sponsors/hydro-one.svg" alt="" aria-hidden="true">
           </div>
         </div>
+        <!-- <p class="center-link"><a href="sponsors/" class="link-arrow">View all partners</a></p> -->
       </div>
     </section>
 
@@ -221,17 +239,9 @@
 
   <!--  Footer (this is the same on every page)  -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <img src="assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter">
-        <ul class="footer-links">
-          <li><a href="./">Home</a></li>
-          <li><a href="events/">Events</a></li>
-          <li><a href="team/">Team</a></li>
-          <li><a href="contact/">Contact</a></li>
-        </ul>
-      </div>
+    <div class="container footer-grid">
       <p class="footer-bottom">&copy; <span id="year"></span> IEEE Computer Society Toronto Metropolitan Chapter</p>
+      <img src="assets/images/logo.svg" alt="IEEE Computer Society Toronto Metropolitan Chapter">
     </div>
   </footer>
 
