@@ -533,11 +533,18 @@ a:hover {
   from { opacity: 0; translate: 0 24px; }
 }
 
+.hero-tagline {
+  margin: 0 auto 10px;
+  color: var(--text);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 500;
+}
+
 .hero-lead {
   max-width: 580px;
   margin: 0 auto 26px;
   color: var(--muted);
-  font-size: 1.02rem;
+  font-size: 0.92rem;
 }
 
 .hero-buttons {
@@ -1432,19 +1439,18 @@ a:hover {
   background: var(--surface);
 }
 
-/* Copyright on the left, logo on the right */
+/* Logo on top, copyright underneath, both lined up on the right */
 .footer-grid {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px 30px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  text-align: right;
 }
 
 .footer-grid img {
   height: 42px;
   width: auto;
-  margin-left: auto; /* stays on the right even when it wraps on phones */
 }
 
 .footer-bottom {
